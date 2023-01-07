@@ -15,6 +15,7 @@ public class Patron : MonoBehaviour
     float knockbackTimer = 0f;
     float knockbackPower = 20f;
 
+    GameManager gm;
     SpriteRenderer sr;
 
 
@@ -22,6 +23,7 @@ public class Patron : MonoBehaviour
     void Start()
     {
         SetRandomPatronSprite();
+        gm = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -50,6 +52,7 @@ public class Patron : MonoBehaviour
 
     void GoHome()
     {
+        gm.NotifyGoingHome(this);
         Destroy(gameObject);
     }
 

@@ -91,4 +91,5 @@ public class Player : MonoBehaviour
         Vector3 position = servingAreaTransform.position + new Vector3(-1.2f, 1f, 0f);
         Instantiate(beverage, position, Quaternion.identity);
     }
+
 }
