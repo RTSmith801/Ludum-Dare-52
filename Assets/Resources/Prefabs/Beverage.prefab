@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 5860347293822986753}
   - component: {fileID: 50293866}
   - component: {fileID: 50293867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Beverage
   m_TagString: Beverage
   m_Icon: {fileID: 0}

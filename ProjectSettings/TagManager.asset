@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ServingArea
   - Beverage
+  - Bartop
   layers:
   - Default
   - TransparentFX

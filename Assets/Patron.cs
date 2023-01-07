@@ -9,11 +9,14 @@ public class Patron : MonoBehaviour
     public float drinkSpeed = 1;
     Beverage bev;
 
+    bool hasHadABeverage = false;
     bool isDrinking = false;
-    float knockBackDuration = .2f;
-    float knockBackTimer = 0f;
+    float knockbackDuration = .2f;
+    float knockbackTimer = 0f;
+    float knockbackPower = 20f;
 
     SpriteRenderer sr;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,11 +29,14 @@ public class Patron : MonoBehaviour
     {
         if (!isDrinking)
             transform.position = transform.position + (Vector3.right * Time.deltaTime * moveSpeed);
-        else if (knockBackTimer < knockBackDuration)
+        else if (knockbackTimer < knockbackDuration)
         {
-            knockBackTimer += Time.deltaTime;
-			transform.position = transform.position - (Vector3.right * Time.deltaTime * moveSpeed * 10);
+            knockbackTimer += Time.deltaTime;
+			transform.position = transform.position - (Vector3.right * Time.deltaTime * moveSpeed * knockbackPower);
 		}
+
+        if (transform.position.x < -10 && hasHadABeverage)
+            GoHome();
 	}
 
     /// <summary>
@@ -40,6 +46,11 @@ public class Patron : MonoBehaviour
     {
         moveSpeed= _moveSpeed;
         drinkSpeed= _drinkSpeed;
+    }
+
+    void GoHome()
+    {
+        Destroy(gameObject);
     }
 
 	private void OnTriggerEnter(Collider other)
@@ -55,8 +66,9 @@ public class Patron : MonoBehaviour
 
     IEnumerator HaveADrink()
     {
+        hasHadABeverage = true;
         isDrinking = true;
-        knockBackTimer = 0f;
+        knockbackTimer = 0f;
 
         yield return new WaitForSeconds(drinkSpeed);
 
@@ -70,7 +82,8 @@ public class Patron : MonoBehaviour
         sr = GetComponentInChildren<SpriteRenderer>();
 
         int spriteNum = Random.Range(0, 64);
-        //sr.sprite = Resources.Load<Sprite>("Sprites/out");
+        Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/out");
+        sr.sprite = sprites[spriteNum];
     }
 
 }

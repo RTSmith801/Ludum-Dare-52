@@ -5,6 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public AudioManager am;
+    [SerializeField] 
+    GameObject[] bartops;
+    GameObject patronPrefab;
+
+    public int level = 1;
 
     private void Awake()
     {
@@ -14,7 +19,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        bartops = GameObject.FindGameObjectsWithTag("Bartop");
+        patronPrefab = Resources.Load("Prefabs/Patron") as GameObject;
+
+        StartLevel();
     }
 
     // Update is called once per frame
@@ -22,4 +30,14 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    void StartLevel()
+    {
+        foreach (var bartop in bartops)
+        {
+            Vector3 pos = new Vector3(-12, 1.01f, bartop.transform.position.z);
+            Instantiate(patronPrefab, pos, Quaternion.identity);
+        }
+    }
+
 }

@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Beverage : MonoBehaviour
 {
     Rigidbody rb;
     public float beverageMoveSpeed = 1;
 	SphereCollider beverageCollider;
+    GameObject emptyGlass;
 
 	// Start is called before the first frame update
 	void Start()
     {
+        emptyGlass = Resources.Load("Prefabs/EmptyGlass") as GameObject;
         rb = GetComponent<Rigidbody>();
         beverageCollider = GetComponent<SphereCollider>();
         Vector3 direction = new Vector3(-1, 0, 0) * beverageMoveSpeed;
@@ -38,8 +41,8 @@ public class Beverage : MonoBehaviour
 
     public void ReturnThatGlass()
     {
-        // instantiate empty glass here
+		Instantiate(emptyGlass, transform.position, Quaternion.identity);
 
-        Destroy(this.gameObject);
+		Destroy(gameObject);
     }
 }
