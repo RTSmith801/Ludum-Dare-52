@@ -17,8 +17,11 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: e6aacf323a2e49e4b8f2d577d1672f72
-    name: MyExposedParam
-  m_AudioMixerGroupViews: []
+    name: volume
+  m_AudioMixerGroupViews:
+  - guids:
+    - fb67ec5aecc40e3448483afad97d3d1a
+    name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
 --- !u!243 &24300002

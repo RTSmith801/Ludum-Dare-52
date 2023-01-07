@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class MainMenu : MonoBehaviour
 {
     GameManager gm;
+    public AudioMixer audioMixer;
 
     private void Awake()
     {
@@ -29,7 +31,7 @@ public class MainMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        //set volume here. 
+        audioMixer.SetFloat("volume", volume);
     }
 
 }
