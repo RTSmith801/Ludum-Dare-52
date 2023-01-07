@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     Rigidbody rb;
     public float playerMoveSpeed = 1;
     bool inServingArea = false;
+    bool facingRight = true;
     Transform servingAreaTransform;
     GameObject beverage;
 
@@ -36,12 +37,30 @@ public class Player : MonoBehaviour
     {
         float hor = Input.GetAxis("Horizontal");
         float ver = Input.GetAxis ("Vertical");
+        //if moving left and player is facing right
+        if (hor < 0 && facingRight)
+        {
+            Flip();
+        }
+        //if moving right and player is facing left
+        else if (hor > 0 && !facingRight)
+        {
+            Flip();
+        }
 
         Vector3 direction = new Vector3(hor, 0, ver) * 25f * playerMoveSpeed;
-
         rb.velocity = direction;
 
        
+    }
+
+    void Flip()
+    {
+        facingRight = !facingRight;
+
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
   
     private void OnTriggerEnter(Collider other)

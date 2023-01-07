@@ -1393,10 +1393,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 50293866, guid: 3adc30d76a9f4d342907c18a710794e4, type: 3}
-      propertyPath: m_Constraints
-      value: 56
-      objectReference: {fileID: 0}
     - target: {fileID: 3825307131584367668, guid: 3adc30d76a9f4d342907c18a710794e4, type: 3}
       propertyPath: m_Name
       value: Beverage
