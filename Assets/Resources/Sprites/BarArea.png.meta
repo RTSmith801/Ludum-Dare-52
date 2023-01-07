@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6d44ff470c073224ba456f7511a8bbd4
+guid: 988d124b6363a7c4180a0faa5b45e8ee
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Beer_0
+      name: BarArea_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 150
-        width: 23
-        height: 25
+        y: 48
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 034bdc02845a31f489b2574ba297fe1c
-      internalID: -2023858070
+      spriteID: 60291f30e8fad454caea9e273b2ac6ca
+      internalID: -4832049
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beer_1
+      name: BarArea_1
       rect:
         serializedVersion: 2
-        x: 2
-        y: 125
-        width: 21
-        height: 20
+        x: 0
+        y: 24
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,104 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b14f18d70d4b2474b9070ad7e4506336
-      internalID: -40964170
+      spriteID: e4822c021a6614e4992ed53e1b975aca
+      internalID: 1597175675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Beer_2
+      name: BarArea_2
       rect:
         serializedVersion: 2
-        x: 2
-        y: 100
-        width: 21
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de9c94fdd91b16b46afe8fc36f2177e0
-      internalID: -1619796788
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Beer_3
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 75
-        width: 21
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e005523bf3558464b8efe2ce6006ac1c
-      internalID: 2001853408
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Beer_4
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 50
-        width: 21
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 72d382ea0ed893b4a8871582bfc0b0f9
-      internalID: -808970582
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Beer_5
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 25
-        width: 21
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e5bcfe62950f5a4482332d77d698f69
-      internalID: 1324349129
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Beer_6
-      rect:
-        serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 21
-        height: 20
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78de8ee8d93d71c43a6ba7e78287bc5c
-      internalID: -691869087
+      spriteID: 9a8894e5df427b54682591e614b33e15
+      internalID: 1619692727
       vertices: []
       indices: 
       edges: []
@@ -266,7 +182,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0725f1c1d7f81254289f49d44ccb752a
+    spriteID: c9a085eef1dabe8459af5ce29997cdae
     internalID: 0
     vertices: []
     indices: 
@@ -274,13 +190,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Beer_2: -1619796788
-      Beer_3: 2001853408
-      Beer_4: -808970582
-      Beer_1: -40964170
-      Beer_6: -691869087
-      Beer_5: 1324349129
-      Beer_0: -2023858070
+      BarArea_0: -4832049
+      BarArea_2: 1619692727
+      BarArea_1: 1597175675
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
