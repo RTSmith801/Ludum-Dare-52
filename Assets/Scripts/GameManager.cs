@@ -47,9 +47,9 @@ public class GameManager : MonoBehaviour
         SetInitialVariables();
 
 		state = GameState.PreLevel;
-		dialogueManager.SetDialoguePanelVisibility(true); // this pauses the game
 
-    }
+		dialogueManager.SetDialoguePanelVisibility(true); // this pauses the game
+	}
 
 
     // Update is called once per frame
@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
             state = GameState.PreLevel;
 		}
 	}
+
 	/// <summary>
 	/// This function exists to make the Start() function easier to read
 	/// </summary>

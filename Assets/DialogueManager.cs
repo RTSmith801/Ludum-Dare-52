@@ -32,7 +32,6 @@ public class DialogueManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-		print(scrollingTextTimer);
         if (startTextScroll && scrollingTextTimer < scrollingTextDuration)
 		{
 			scrollingTextTimer += Time.unscaledDeltaTime;
