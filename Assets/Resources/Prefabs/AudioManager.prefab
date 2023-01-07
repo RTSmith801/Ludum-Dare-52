@@ -44,3 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca3bd23159335148bd704a4f87323e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BGMFadeTimer: 1
+  sounds:
+  - name: BGM1
+    clip: {fileID: 8300000, guid: f2d2c5e03c0de8244ac62a824778ff4e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+  - name: ButtonSound
+    clip: {fileID: 8300000, guid: 4d0f152d559833c47b7d3a31c286495e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}

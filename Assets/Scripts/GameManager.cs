@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public AudioManager am;
+
+    private void Awake()
+    {
+        am = FindObjectOfType<AudioManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
