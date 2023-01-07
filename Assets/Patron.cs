@@ -29,16 +29,19 @@ public class Patron : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isDrinking)
-            transform.position = transform.position + (Vector3.right * Time.deltaTime * moveSpeed);
-        else if (knockbackTimer < knockbackDuration)
+        if (!gm.gamePaused)
         {
-            knockbackTimer += Time.deltaTime;
-			transform.position = transform.position - (Vector3.right * Time.deltaTime * moveSpeed * knockbackPower);
-		}
+			if (!isDrinking)
+				transform.position = transform.position + (Vector3.right * Time.deltaTime * moveSpeed);
+			else if (knockbackTimer < knockbackDuration)
+			{
+				knockbackTimer += Time.deltaTime;
+				transform.position = transform.position - (Vector3.right * Time.deltaTime * moveSpeed * knockbackPower);
+			}
 
-        if (transform.position.x < -10 && hasHadABeverage)
-            GoHome();
+			if (transform.position.x < -10 && hasHadABeverage)
+				GoHome();
+		}
 	}
 
     /// <summary>

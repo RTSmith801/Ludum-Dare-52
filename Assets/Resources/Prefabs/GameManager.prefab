@@ -46,4 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   am: {fileID: 0}
   bartops: []
+  playerSpawnPosition: {x: 11, y: 1, z: 8.5}
   level: 1
