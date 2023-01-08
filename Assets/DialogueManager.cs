@@ -38,6 +38,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (startTextScroll)
 			DoTheTextScroll();
+		else if (Input.GetKeyDown(KeyCode.Space) && isVisible)
+		{
+			print("ready to start level: " + gm.readyToStartLevel);
+			gm.readyToStartLevel = true;
+		}
+
 
 	}
 
@@ -77,7 +83,6 @@ public class DialogueManager : MonoBehaviour
 
 	void SetText()
 	{
-		print("setting text for level " + gm.level);
 
 		levelTextArray[0] = "Welcome to my taproom! Just stand next to the tap and hit space to send a cold one down the line!";
 		levelTextArray[1] = "Wow gamer, you really served up those drinks real fast! Be careful you don't get anyone TOO drunk, LOL!";

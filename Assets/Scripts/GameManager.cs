@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
 
     public bool gamePaused { get; private set; }
+    public bool readyToStartLevel;
 	GameState state;
 
 
@@ -76,10 +77,9 @@ public class GameManager : MonoBehaviour
 
     void PreLevel()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+        if (readyToStartLevel)
             StartLevel();
-        }
+
     }
 
     void InLevel()
@@ -101,13 +101,13 @@ public class GameManager : MonoBehaviour
 				minSpawnTime *= .9f;
 				maxSpawnTime *= .9f;
 
-                if (level < 4)
+				dialogueManager.SetDialoguePanelVisibility(true);
+
+				if (level < 4)
                     state = GameState.PreLevel;
                 else
                     GoToPostLevel();
 
-
-				dialogueManager.SetDialoguePanelVisibility(true);
 			}
 		}
 	}
@@ -121,7 +121,6 @@ public class GameManager : MonoBehaviour
 
     void PostLevel()
     {
-
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
@@ -139,6 +138,7 @@ public class GameManager : MonoBehaviour
 		patronsInBar = new List<Patron>();
 		player = FindObjectOfType<Player>();
         dialogueManager = FindObjectOfType<DialogueManager>();
+        readyToStartLevel = false;
 
 
 		minSpawnTime = baseMinSpawnTime;
@@ -183,6 +183,8 @@ public class GameManager : MonoBehaviour
                 SpawnPatron(i, bartop);
 			}
         }
+
+        readyToStartLevel = false;
     }
 
     /// <summary>
