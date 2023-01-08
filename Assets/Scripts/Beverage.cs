@@ -9,6 +9,7 @@ public class Beverage : MonoBehaviour
     public float beverageMoveSpeed = 1;
 	SphereCollider beverageCollider;
     GameObject emptyGlass;
+    Animator animator;
 
 	// Start is called before the first frame update
 	void Start()
@@ -18,6 +19,7 @@ public class Beverage : MonoBehaviour
         beverageCollider = GetComponent<SphereCollider>();
         Vector3 direction = new Vector3(-1, 0, 0) * beverageMoveSpeed;
         rb.velocity = direction;
+        animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class Beverage : MonoBehaviour
         beverageCollider.enabled = false;
         rb.constraints = RigidbodyConstraints.FreezePosition;
         transform.parent = newParent;
+        animator.SetTrigger("IsDrinking");
     }
 
     public void ReturnThatGlass()

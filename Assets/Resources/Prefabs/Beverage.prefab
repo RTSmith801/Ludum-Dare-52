@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 5860347293822986753}
   - component: {fileID: 50293866}
   - component: {fileID: 50293867}
+  - component: {fileID: 281020865}
   m_Layer: 6
   m_Name: Beverage
   m_TagString: Beverage
@@ -226,3 +227,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beverageMoveSpeed: 10
+--- !u!95 &281020865
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3825307131584367668}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 736bc927d829b2e41a72fd615ed6a039, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
