@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class Beverage : MonoBehaviour
 {
+    GameManager gm;
     Rigidbody rb;
     public float beverageMoveSpeed = 1;
 	SphereCollider beverageCollider;
@@ -14,6 +15,7 @@ public class Beverage : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+        gm = FindObjectOfType<GameManager>();
         emptyGlass = Resources.Load("Prefabs/EmptyGlass") as GameObject;
         rb = GetComponent<Rigidbody>();
         beverageCollider = GetComponent<SphereCollider>();
@@ -48,4 +50,20 @@ public class Beverage : MonoBehaviour
 
 		Destroy(gameObject);
     }
+
+	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.transform.name == "Wall-Left")
+            BreakGlass();
+	}
+
+    void BreakGlass()
+    {
+		gm.am.Play("GlassBreak");
+		gm.GameOver();
+
+
+        // breaking glass goes here
+        Destroy(gameObject);
+	}
 }
