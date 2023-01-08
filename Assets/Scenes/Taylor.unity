@@ -1642,6 +1642,10 @@ PrefabInstance:
       propertyPath: sounds.Array.data[3].volume
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
+      propertyPath: sounds.Array.data[3].playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7149816794328390084, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
       propertyPath: m_RootOrder
       value: 4
