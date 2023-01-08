@@ -101,7 +101,8 @@ public class GameManager : MonoBehaviour
 				minSpawnTime *= .9f;
 				maxSpawnTime *= .9f;
 
-                state = GameState.PreLevel;
+                state = level < 4 ? GameState.PreLevel : GameState.PostLevel;
+
 				dialogueManager.SetDialoguePanelVisibility(true);
 			}
 		}
@@ -109,7 +110,8 @@ public class GameManager : MonoBehaviour
 
     void PostLevel()
     {
-        
+        am.Stop("BGM1");
+        am.Play("BGM2");
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{

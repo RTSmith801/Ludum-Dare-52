@@ -1592,15 +1592,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
       propertyPath: sounds.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
       propertyPath: sounds.Array.data[2].clip
       value: 
       objectReference: {fileID: 8300000, guid: 028dcbe05674a9747ac0bb6b7973518e, type: 3}
     - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
+      propertyPath: sounds.Array.data[2].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
       propertyPath: sounds.Array.data[2].name
       value: boop
+      objectReference: {fileID: 0}
+    - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
+      propertyPath: sounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 61a95a8b12625134eb614edfc58f1507, type: 3}
+    - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
+      propertyPath: sounds.Array.data[3].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
+      propertyPath: sounds.Array.data[3].name
+      value: BGM2
       objectReference: {fileID: 0}
     - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
       propertyPath: sounds.Array.data[2].group
@@ -1611,7 +1627,19 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
+      propertyPath: sounds.Array.data[3].group
+      value: 
+      objectReference: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}
+    - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
+      propertyPath: sounds.Array.data[3].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
       propertyPath: sounds.Array.data[2].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462873123875868575, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
+      propertyPath: sounds.Array.data[3].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7149816794328390084, guid: 41e1d0aa5de43d6428688fc69b365ba1, type: 3}
@@ -1849,6 +1877,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7723466388730290368, guid: c280952282130c94b95d89089d28c90d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723466388730290368, guid: c280952282130c94b95d89089d28c90d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723466388730290368, guid: c280952282130c94b95d89089d28c90d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723466388730290368, guid: c280952282130c94b95d89089d28c90d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723466389468171299, guid: c280952282130c94b95d89089d28c90d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723466389468171299, guid: c280952282130c94b95d89089d28c90d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723466389468171299, guid: c280952282130c94b95d89089d28c90d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7723466389468171299, guid: c280952282130c94b95d89089d28c90d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7723466389909647058, guid: c280952282130c94b95d89089d28c90d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
