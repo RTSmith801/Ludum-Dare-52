@@ -10,7 +10,7 @@ public class EmptyGlass : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gm = gameObject.GetComponent<GameManager>();
+        gm = FindObjectOfType<GameManager>();
 		rb = GetComponent<Rigidbody>();
 		rb.velocity = new Vector3(1, 0, 0) * glassMoveSpeed;
 	}
@@ -40,5 +40,8 @@ public class EmptyGlass : MonoBehaviour
     {
         gm.am.Play("GlassBreak");
         gm.GameOver();
+
+        // break glass
+        Destroy(gameObject);
     }
 }

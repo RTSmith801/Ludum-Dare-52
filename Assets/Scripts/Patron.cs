@@ -18,6 +18,11 @@ public class Patron : MonoBehaviour
     GameManager gm;
     SpriteRenderer sr;
 
+    [SerializeField]
+    bool canTakeDamage;
+    [SerializeField]
+    int health = 3;
+
 
     // Start is called before the first frame update
     void Start()
