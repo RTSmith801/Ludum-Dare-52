@@ -83,6 +83,7 @@ public class DialogueManager : MonoBehaviour
 		levelTextArray[1] = "Wow gamer, you really served up those drinks real fast! Be careful you don't get anyone TOO drunk, LOL!";
 		levelTextArray[2] = "Wizz bang! You're really good at this, look how much money we're making! God I love money!";
 		levelTextArray[3] = "Oh God! I warned you not to get them too drunk! What are we going to do?! Here, take this and HANDLE it!";
+		levelTextArray[4] = "I uh, didn't think you'd get this far...";
 
 		dialogueText.text = levelTextArray[gm.level - 1];
 	}

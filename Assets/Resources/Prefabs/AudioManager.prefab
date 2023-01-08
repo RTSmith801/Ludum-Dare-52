@@ -62,3 +62,19 @@ MonoBehaviour:
     playOnAwake: 0
     source: {fileID: 0}
     group: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}
+  - name: boop
+    clip: {fileID: 8300000, guid: 028dcbe05674a9747ac0bb6b7973518e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    playOnAwake: 0
+    source: {fileID: 0}
+    group: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}
+  - name: BGM2
+    clip: {fileID: 8300000, guid: 61a95a8b12625134eb614edfc58f1507, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    playOnAwake: 1
+    source: {fileID: 0}
+    group: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}
