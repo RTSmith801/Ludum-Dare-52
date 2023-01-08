@@ -67,6 +67,9 @@ public class GameManager : MonoBehaviour
             case GameState.PostLevel:
                 PostLevel();
                 break;
+            case GameState.GameOver:
+                GameOver();
+                break;
             default:
                 break;
         }
@@ -127,6 +130,11 @@ public class GameManager : MonoBehaviour
             state = GameState.PreLevel;
 		}
 	}
+
+    public void GameOver()
+    {
+
+    }
 
 	/// <summary>
 	/// This function exists to make the Start() function easier to read
@@ -218,5 +226,5 @@ public class GameManager : MonoBehaviour
 
 
 
-	enum GameState { PreLevel, InLevel, PostLevel }
+	enum GameState { PreLevel, InLevel, PostLevel, GameOver }
 }

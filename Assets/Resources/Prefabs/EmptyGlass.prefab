@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4018598239544708912}
   - component: {fileID: 7390634719581325659}
   - component: {fileID: 7174040514567239138}
+  - component: {fileID: 3596198506549364692}
   m_Layer: 6
   m_Name: EmptyGlass
   m_TagString: Untagged
@@ -96,7 +97,7 @@ SphereCollider:
   m_GameObject: {fileID: 6018770147080530181}
   m_Material: {fileID: 13400000, guid: fd1e685dc8c695f48be2c811ca38c6f2, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 1.5, z: 0}
@@ -129,6 +130,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glassMoveSpeed: 3
+--- !u!65 &3596198506549364692
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018770147080530181}
+  m_Material: {fileID: 13400000, guid: fd1e685dc8c695f48be2c811ca38c6f2, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7390634718525183755
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,10 +39,7 @@ public class DialogueManager : MonoBehaviour
         if (startTextScroll)
 			DoTheTextScroll();
 		else if (Input.GetKeyDown(KeyCode.Space) && isVisible)
-		{
-			print("ready to start level: " + gm.readyToStartLevel);
 			gm.readyToStartLevel = true;
-		}
 
 
 	}
@@ -64,7 +61,6 @@ public class DialogueManager : MonoBehaviour
 
 	public void SetDialoguePanelVisibility(bool visible)
 	{
-
 		isVisible = visible;
 		gm.PauseGame(visible);
 
