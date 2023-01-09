@@ -49,7 +49,8 @@ public class GameManager : MonoBehaviour
     public int levelPatrons;
 
     //for Harvest Time!
-    public bool drunkPatron = false; 
+    public bool drunkPatron = false;
+    public bool firstDrunkPatron = false;
 
 
 
@@ -141,13 +142,13 @@ public class GameManager : MonoBehaviour
 				dialogueManager.SetDialoguePanelVisibility(true);
 
                 //Currently hardcoded to stop at level 4. Revisit this to continue gameplay. 
-				if (level < 4 && drunkPatron)
+				if (level < 4 && !drunkPatron)
                 {
                     state = GameState.PreLevel;
                     HarvesterBarSign.GetComponent<Animator>().SetBool("HarvestTime", false);
                     VirtualCameraOne.SetActive(true);
                 }
-                else
+                else if (level < 4 && drunkPatron)
                 {
                     GoToPostLevel();
                     HarvesterBarSign.GetComponent<Animator>().SetBool("HarvestTime", true);
@@ -319,7 +320,7 @@ public class GameManager : MonoBehaviour
             dialogueManager.SetDialoguePanelVisibility(true, text);
         }
 
-        if (brokenGlasses == 6)
+        if (brokenGlasses >= 10)
         {
             //Temp solution. decrease profit by $3 for every glass that breaks
             string text = "That's the last straw! I'm going to have to let you go.";
@@ -355,7 +356,7 @@ public class GameManager : MonoBehaviour
             string text = "I feel like you're not taking this seriously.";
             dialogueManager.SetDialoguePanelVisibility(true, text);
         }
-        else if (wastedDrinks == 6)
+        else if (wastedDrinks >= 10)
         {
             //Temp solution. decrease profit by $3 for every glass that breaks
             string text = "Okay, this isn't working out. Come back when you actually want to work.";

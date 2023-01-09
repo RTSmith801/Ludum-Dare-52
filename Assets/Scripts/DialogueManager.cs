@@ -83,15 +83,72 @@ public class DialogueManager : MonoBehaviour
 
     void SetText()
     {
+        string textToSay = "";
+
         if (!gm.drunkPatron)
         {
-            levelTextArray[0] = "Thanks for working at my bar! Here we value quick service! Just get our patrons a drink before they get to the end of the bar!";
-            levelTextArray[1] = "Wow gamer, you really served up those drinks real fast! Be careful you don't get anyone TOO drunk, LOL!";
-            levelTextArray[2] = "Wizz bang! You're really good at this, look how much money we're making! God, I love money!";
+            if(gm.level == 1)
+            {
+                textToSay = "Thanks for working at my bar! Here we value quick service, and money! Just get our patrons a drink before they get to the end of the bar!";
+            }
+            else if (gm.level == 2)
+            {
+                textToSay = "Wizz bang! You're really good at this, look how much money we're making! God, I love money!";
+            }
+            else if (gm.level == 3)
+            {
+                textToSay = "Wow gamer, you really served up those drinks real fast! Be careful you don't get anyone TOO drunk, LOL!";
+            }
+            else
+            {
+                int rand = Random.Range(0, 4);
+                switch (rand)
+                {
+                    case 0:
+                        textToSay = "Here comes more money! I mean customers...";
+                        break;
+                    case 1:
+                        textToSay = "Good work, partner! Keep it going!";
+                        break;
+                    case 2:
+                        textToSay = "We're making a \"killing\"!";
+                        break;
+                    case 3:
+                        textToSay = "Don't you just love working here?";
+                        break;
+                    default:
+                        textToSay = "We're making a \"killing\"!";
+                        break;
+                }
+            }   
+            
+        }
+        else if (gm.drunkPatron  && gm.firstDrunkPatron == false)
+        {
+            textToSay = "Oh hey! A customer blacked out! Now we have an opportunity to make some real money! Take this, it's harvest time!";
+            gm.firstDrunkPatron = true;
         }
         else if (gm.drunkPatron)
         {
-            levelTextArray[3] = "Oh hey! A customer blacked out! Now we have an opportunity to make some real money! Take this, it's harvest time!";
+            int rand = Random.Range(0, 4);
+            switch (rand)
+            {
+                case 0:
+                    textToSay = "Oh goodie! It's harvest time!";
+                    break;
+                case 1:
+                    textToSay = "Time to make some real money!";
+                    break;
+                case 2:
+                    textToSay = "Don't worry, they won't be missed!";
+                    break;
+                case 3:
+                    textToSay = "This is my favorite part of this job!";
+                    break;
+                default:
+                    textToSay = "We're making a \"killing\"!";
+                    break;
+            }
         }
         //levelTextArray[0] = "Thanks for working at my bar! Here we value quick service! Just get our patrons a drink before they get to the end of the bar!";
         //levelTextArray[1] = "Wow gamer, you really served up those drinks real fast! Be careful you don't get anyone TOO drunk, LOL!";
@@ -99,7 +156,9 @@ public class DialogueManager : MonoBehaviour
         //levelTextArray[3] = "Oh God! I warned you not to get them too drunk! What are we going to do?! Here, take this and HANDLE it!";
         //levelTextArray[4] = "I uh, didn't think you'd get this far...";
 
-        dialogueText.text = levelTextArray[gm.level - 1];
+        //dialogueText.text = levelTextArray[gm.level - 1];
+
+        dialogueText.text = textToSay;
     }
 
     // Overloaded Spaghetti Code
