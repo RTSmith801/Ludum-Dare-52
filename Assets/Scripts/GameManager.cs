@@ -37,8 +37,8 @@ public class GameManager : MonoBehaviour
     public int level = 1;
 
     //spawn time variables
-    float baseMinSpawnTime = 1f;
-    float baseMaxSpawnTime = 3.5f;
+    float baseMinSpawnTime = .5f;
+    float baseMaxSpawnTime = 3f;
     float minSpawnTime;
     float maxSpawnTime;
     float randSpawnTime;
@@ -46,7 +46,10 @@ public class GameManager : MonoBehaviour
 
     //determines how many patrons will spawn in the level
     public int startingMaxPatrons = 4;
-    public int levelPatrons; 
+    public int levelPatrons;
+
+    //for Harvest Time!
+    public bool drunkPatron = false; 
 
 
 
@@ -72,6 +75,7 @@ public class GameManager : MonoBehaviour
         score = 0;
         UpdateScoreUI(0);
         gameOver = false;
+        drunkPatron = false;
     }
 
     // Update is called once per frame
@@ -137,7 +141,7 @@ public class GameManager : MonoBehaviour
 				dialogueManager.SetDialoguePanelVisibility(true);
 
                 //Currently hardcoded to stop at level 4. Revisit this to continue gameplay. 
-				if (level < 4)
+				if (level < 4 && drunkPatron)
                 {
                     state = GameState.PreLevel;
                     HarvesterBarSign.GetComponent<Animator>().SetBool("HarvestTime", false);
