@@ -31,7 +31,11 @@ public class Patron : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Makes sure it doesn't overwrite the special case on level 4
+        if (health != 1)    
+            SetHealth(Random.Range(1, 4));
         SetRandomPatronSprite();
+
 
         //Randomize Move Speed;
         SetRandomMoveSpeed();
@@ -142,7 +146,7 @@ public class Patron : MonoBehaviour
         gm.am.Play("thud");
         isDrunk = true;
         gm.drunkPatron = true;
-        GetComponent<SphereCollider>().radius = 2.5f;
+        GetComponent<SphereCollider>().radius = 4f;
         transform.position = transform.position + new Vector3(1, 0, 1);
         sr.transform.rotation = sr.transform.rotation * Quaternion.Euler(0, 0, -90);
 		gm.RemoveFromSoberPatronsList(this);

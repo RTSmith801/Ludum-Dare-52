@@ -12,11 +12,11 @@ public class DialogueManager : MonoBehaviour
     public float scrollingTextDuration = 1;
     float scrollingTextTimer;
 
-	Animator dialogueAnimator;
-	GameObject dialoguePanel;
-	TextMeshProUGUI dialogueText;
+    Animator dialogueAnimator;
+    GameObject dialoguePanel;
+    TextMeshProUGUI dialogueText;
 
-	bool isVisible;
+    public bool isVisible { get; private set; }
 	bool startTextScroll;
 	string[] levelTextArray;
 
