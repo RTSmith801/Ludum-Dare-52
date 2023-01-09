@@ -168,11 +168,14 @@ public class GameManager : MonoBehaviour
 
     void GoToPostLevel()
     {
+
 		am.Stop("BGM1");
 		am.Play("BGM2");
-        state = GameState.PostLevel;
 
-        ClearAllDrinks();
+        state = GameState.PostLevel;
+        player.SetPlayerMoveSpeed();
+
+		ClearAllDrinks();
         player.EnableKnife(true);
 	}
 
@@ -224,6 +227,8 @@ public class GameManager : MonoBehaviour
 
 		am.Stop("BGM2");
 		am.PlayNoRestartIfPlaying("BGM1");
+
+		player.SetPlayerMoveSpeed();
 	}
 
     public void GameOver()
@@ -282,7 +287,8 @@ public class GameManager : MonoBehaviour
 
     void StartLevel()
     {
-        player.EnableKnife(false);
+		drunkPatron = false;
+		player.EnableKnife(false);
         state = GameState.InLevel;
 
         ClearAllDrinks();
@@ -380,9 +386,9 @@ public class GameManager : MonoBehaviour
         {
             highScore = score;
         }
-        UIText.text = "HIGHSCORE: $" + highScore + "\nSCORE: $" + score;
-
-    }
+		//UIText.text = "HIGHSCORE: $" + highScore + "\nSCORE: $" + score;
+		UIText.text = "SCORE: $" + score;
+	}
 
     // End game conditions below
 

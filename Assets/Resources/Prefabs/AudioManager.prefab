@@ -142,3 +142,11 @@ MonoBehaviour:
     playOnAwake: 0
     source: {fileID: 0}
     group: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}
+  - name: catch
+    clip: {fileID: 8300000, guid: cf5bea9550e5a25459cf1b1aa4ad8628, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+    group: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}

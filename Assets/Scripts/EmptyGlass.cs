@@ -28,8 +28,8 @@ public class EmptyGlass : MonoBehaviour
     void CatchGlass()
     {
         Destroy(gameObject);
-        //audio for catch glass
-        //point increase? 
+        gm.am.Play("catch");
+        gm.UpdateScoreUI(1);
     }
 
     void BreakGlass()

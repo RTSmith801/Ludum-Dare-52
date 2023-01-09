@@ -55,6 +55,20 @@ public class Player : MonoBehaviour
 		}
 	}
 
+    public void SetPlayerMoveSpeed()
+    {
+        
+        if (gm.state == GameManager.GameState.PostLevel)
+        {
+			playerMoveSpeed = .5f;
+		}
+        else
+        {
+            playerMoveSpeed = 1f;
+        }
+
+    }
+
 	private void FixedUpdate()
 	{
         // Since this is called in FixedUpdate(), it does not get read when the game is paused.
