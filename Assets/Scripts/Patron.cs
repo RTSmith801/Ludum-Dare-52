@@ -25,7 +25,7 @@ public class Patron : MonoBehaviour
     bool canTakeDamage;
     [SerializeField]
     int health = 3;
-    bool blackout = false;
+    public bool isDrunk = false;
 
 
     // Start is called before the first frame update
@@ -49,7 +49,7 @@ public class Patron : MonoBehaviour
     {
         if (!gm.gamePaused)
         {
-            if (!blackout)
+            if (!isDrunk)
             {
 				if (!isDrinking)
 					transform.position = transform.position + (Vector3.right * Time.deltaTime * moveSpeed);
@@ -77,20 +77,28 @@ public class Patron : MonoBehaviour
     /// </summary>
     public void Initialize(float _moveSpeed, float _drinkSpeed)
     {
-        moveSpeed= _moveSpeed;
+        moveSpeed = _moveSpeed;
         drinkSpeed= _drinkSpeed;
+    }
+
+    /// <summary>
+    /// This is for the GM to manually set the health in special situations.
+    /// </summary>
+    public void SetHealth(int _health)
+    {
+        health = _health;
     }
 
     void GoHome()
     {
         gm.am.Play("Money");
-        gm.NotifyGoingHome(this);
+        gm.RemoveFromSoberPatronsList(this);
         Destroy(gameObject);
     }
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Beverage" && !isDrinking && !blackout)
+		if (other.tag == "Beverage" && !isDrinking && !isDrunk)
         {
             bev = other.GetComponent<Beverage>();
             bev.StopThatDrink(transform);
@@ -102,6 +110,7 @@ public class Patron : MonoBehaviour
         {   
             gm.PatronCrossedFinishLine();
         }
+
 	}
 
     IEnumerator HaveADrink()
@@ -131,10 +140,13 @@ public class Patron : MonoBehaviour
     void Blackout()
     {
         gm.am.Play("thud");
-        blackout = true;
-        sr.transform.position = sr.transform.position + new Vector3(1, 0, 1);
+        isDrunk = true;
+        gm.drunkPatron = true;
+        GetComponent<SphereCollider>().radius = 2.5f;
+        transform.position = transform.position + new Vector3(1, 0, 1);
         sr.transform.rotation = sr.transform.rotation * Quaternion.Euler(0, 0, -90);
-    }
+		gm.RemoveFromSoberPatronsList(this);
+	}
 
 
     void SetRandomPatronSprite()

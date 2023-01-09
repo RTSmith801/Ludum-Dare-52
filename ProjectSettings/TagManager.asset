@@ -10,6 +10,7 @@ TagManager:
   - Floor
   - UI
   - FinishLine
+  - Patron
   layers:
   - Default
   - TransparentFX

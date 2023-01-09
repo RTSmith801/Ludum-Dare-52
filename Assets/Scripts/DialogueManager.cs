@@ -40,10 +40,11 @@ public class DialogueManager : MonoBehaviour
 			DoTheTextScroll();
 		else if (Input.GetKeyDown(KeyCode.Space) && isVisible && !gm.gameOver)
         {
-			gm.readyToStartLevel = true;
+            if (gm.state == GameManager.GameState.PreLevel)
+                gm.readyToStartLevel = true;
+
             SetDialoguePanelVisibility(false);
         }
-
 
 	}
 
@@ -150,13 +151,7 @@ public class DialogueManager : MonoBehaviour
                     break;
             }
         }
-        //levelTextArray[0] = "Thanks for working at my bar! Here we value quick service! Just get our patrons a drink before they get to the end of the bar!";
-        //levelTextArray[1] = "Wow gamer, you really served up those drinks real fast! Be careful you don't get anyone TOO drunk, LOL!";
-        //levelTextArray[2] = "Wizz bang! You're really good at this, look how much money we're making! God, I love money!";
-        //levelTextArray[3] = "Oh God! I warned you not to get them too drunk! What are we going to do?! Here, take this and HANDLE it!";
-        //levelTextArray[4] = "I uh, didn't think you'd get this far...";
 
-        //dialogueText.text = levelTextArray[gm.level - 1];
 
         dialogueText.text = textToSay;
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 //using UnityEditor.Animations;
@@ -10,10 +11,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public AudioManager am;
-    [SerializeField] 
+    [SerializeField]
     GameObject[] bartops;
     GameObject patronPrefab;
-    List<Patron> patronsInBar;
+    GameObject patronPlusPlusPrefab;
+    List<Patron> soberPatronsInBar;
     public DialogueManager dialogueManager;
 
     //Scene Switch Objects
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     //determines how many patrons will spawn in the level
     public int startingMaxPatrons = 4;
-    public int levelPatrons;
+    public int remainingUnspawnedPatrons;
 
     //for Harvest Time!
     public bool drunkPatron = false;
@@ -56,7 +58,8 @@ public class GameManager : MonoBehaviour
 
     public bool gamePaused { get; private set; }
     public bool readyToStartLevel;
-	GameState state;
+    [SerializeField]
+    public GameState state { private set; get; }
 
 
 	private void Awake()
@@ -69,7 +72,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SetInitialVariables();
-        levelPatrons = startingMaxPatrons;
+        remainingUnspawnedPatrons = startingMaxPatrons;
         state = GameState.PreLevel;
 
 		dialogueManager.SetDialoguePanelVisibility(true); // this pauses the game
@@ -118,37 +121,36 @@ public class GameManager : MonoBehaviour
 			spawnTimer += Time.deltaTime;
 
             // Jump timer to spawan another patron if the bar is empty
-            if (patronsInBar.Count <= 0)
+            if (soberPatronsInBar.Count <= 0)
             {
                 spawnTimer += randSpawnTime;
             }
 
-			if (spawnTimer > randSpawnTime && levelPatrons > 0)
+			if (spawnTimer > randSpawnTime && remainingUnspawnedPatrons > 0)
 			{
 				SpawnPatron();
 				spawnTimer = 0;
 				randSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);
 			}
 
-			if (patronsInBar.Count <= 0 && levelPatrons <= 0)
+
+            // When there are no more sober patrons in the bar
+			if (soberPatronsInBar.Count <= 0 && remainingUnspawnedPatrons <= 0)
 			{
                 //increase level and increase patrons
                 level++;
-                levelPatrons = (startingMaxPatrons + (level * 2));  
+                remainingUnspawnedPatrons = (startingMaxPatrons + (level + 2));  
 
                 minSpawnTime *= .9f;
 				maxSpawnTime *= .9f;
 
 				dialogueManager.SetDialoguePanelVisibility(true);
 
-                //Currently hardcoded to stop at level 4. Revisit this to continue gameplay. 
-				if (level < 4 && !drunkPatron)
+				if (!drunkPatron)
                 {
-                    state = GameState.PreLevel;
-                    HarvesterBarSign.GetComponent<Animator>().SetBool("HarvestTime", false);
-                    VirtualCameraOne.SetActive(true);
+                    GoToPreLevel();
                 }
-                else if (level < 4 && drunkPatron)
+                else if (drunkPatron)
                 {
                     GoToPostLevel();
                     HarvesterBarSign.GetComponent<Animator>().SetBool("HarvestTime", true);
@@ -166,16 +168,40 @@ public class GameManager : MonoBehaviour
     {
 		am.Stop("BGM1");
 		am.Play("BGM2");
+        state = GameState.PostLevel;
 
+        ClearAllDrinks();
+        player.EnableKnife(true);
 	}
 
     void PostLevel()
     {
 
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-            state = GameState.PreLevel;
+
+        List<Patron> drunkPatrons = FindObjectsOfType<Patron>().ToList();
+
+        if (drunkPatrons.Count <= 0)
+        {
+			string text = "These organs you harvested go for big bucks on the black market! Good work, gamer!";
+			dialogueManager.SetDialoguePanelVisibility(true, text);
+            GoToPreLevel();
 		}
+
+
+		//if (Input.GetKeyDown(KeyCode.Space))
+		//{
+  //          state = GameState.PreLevel;
+		//}
+	}
+
+    void GoToPreLevel()
+    {
+		state = GameState.PreLevel;
+		HarvesterBarSign.GetComponent<Animator>().SetBool("HarvestTime", false);
+		VirtualCameraOne.SetActive(true);
+
+		am.Stop("BGM2");
+		am.Play("BGM1");
 	}
 
     public void GameOver()
@@ -200,7 +226,8 @@ public class GameManager : MonoBehaviour
 	{
 		bartops = GameObject.FindGameObjectsWithTag("Bartop");
 		patronPrefab = Resources.Load("Prefabs/Patron") as GameObject;
-		patronsInBar = new List<Patron>();
+		patronPlusPlusPrefab = Resources.Load("Prefabs/Patron++") as GameObject;
+		soberPatronsInBar = new List<Patron>();
 		player = FindObjectOfType<Player>();
         dialogueManager = FindObjectOfType<DialogueManager>();
         readyToStartLevel = false;
@@ -229,19 +256,13 @@ public class GameManager : MonoBehaviour
 
     void StartLevel()
     {
+        player.EnableKnife(false);
         state = GameState.InLevel;
-        //Now being changed in Dialogue Manager
-		//dialogueManager.SetDialoguePanelVisibility(false);
 
-        //Stopping player from moving in between levels.
-        //player.transform.position = playerSpawnPosition;
+        ClearAllDrinks();
 
         // Changing spawning to filter in and have a set number per level. 
         int enemiesPerBar = 1;
-        //if (level < 4)
-        //    enemiesPerBar = level;
-        //else
-        //    enemiesPerBar = 4;
 
         // Spawns all the patrons and adds them to the list of patrons
         foreach (var bartop in bartops)
@@ -252,19 +273,48 @@ public class GameManager : MonoBehaviour
 			}
         }
 
+        if (level == 4)
+        {
+			Patron patron = SpawnPatron(-10, bartops[1]);
+            patron.SetHealth(1);
+		}
+
+
         readyToStartLevel = false;
     }
+
+    void ClearAllDrinks()
+    {
+
+		foreach (var emptyGlass in FindObjectsOfType<EmptyGlass>())
+		{
+			Destroy(emptyGlass.gameObject);
+		}
+
+		foreach (var Beverage in FindObjectsOfType<Beverage>())
+		{
+			Destroy(Beverage.gameObject);
+		}
+	}
 
     /// <summary>
     /// Spawns a patron at a specified bartop at a given X offset
     /// </summary>
     /// <param name="xOffset"></param>
     /// <param name="zOffset"></param>
-    void SpawnPatron(float xOffset, GameObject bartop)
+    Patron SpawnPatron(float xOffset, GameObject bartop)
     {
+		GameObject patronPrefabToSpawn;
+		if (level < 4)
+			patronPrefabToSpawn = patronPrefab;
+		else
+			patronPrefabToSpawn = patronPlusPlusPrefab;
+
 		Vector3 pos = new Vector3(-12 - (xOffset), 1.01f, bartop.transform.position.z);
-		GameObject patron = Instantiate(patronPrefab, pos, Quaternion.identity);
-		patronsInBar.Add(patron.GetComponent<Patron>());
+		GameObject patron = Instantiate(patronPrefabToSpawn, pos, Quaternion.identity);
+		soberPatronsInBar.Add(patron.GetComponent<Patron>());
+
+        return patron.GetComponent<Patron>();
     }
 
     /// <summary>
@@ -272,19 +322,29 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void SpawnPatron()
     {
+        GameObject patronPrefabToSpawn;
+        if (level < 4)
+            patronPrefabToSpawn = patronPrefab;
+        else
+            patronPrefabToSpawn = patronPlusPlusPrefab;
+
         //decrease the number of patrons that will spawn in the level
-        levelPatrons--;
+        remainingUnspawnedPatrons--;
 
         int barNum = Random.Range(0, bartops.Length);
 		Vector3 pos = new Vector3(-12, 1.01f, bartops[barNum].transform.position.z);
 
-		GameObject patron = Instantiate(patronPrefab, pos, Quaternion.identity);
-		patronsInBar.Add(patron.GetComponent<Patron>());
+		GameObject patron = Instantiate(patronPrefabToSpawn, pos, Quaternion.identity);
+		soberPatronsInBar.Add(patron.GetComponent<Patron>());
 	}
 
-    public void NotifyGoingHome(Patron patronGoingHome)
+    /// <summary>
+    /// used for going home or getting blackout drunk
+    /// </summary>
+    /// <param name="patronGoingHome"></param>
+    public void RemoveFromSoberPatronsList(Patron patronGoingHome)
     {
-        patronsInBar.Remove(patronGoingHome);
+        soberPatronsInBar.Remove(patronGoingHome);
     }
 
     public void UpdateScoreUI(int update)
@@ -373,5 +433,5 @@ public class GameManager : MonoBehaviour
         dialogueManager.SetDialoguePanelVisibility(true, text);
         GameOver();
     }
-    enum GameState { PreLevel, InLevel, PostLevel, GameOver }
+    public enum GameState { PreLevel, InLevel, PostLevel, GameOver }
 }

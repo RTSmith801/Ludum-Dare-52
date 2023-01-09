@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     GameObject beverage;
     GameManager gm;
 
+    public SpriteRenderer knifeSprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +26,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyDown(KeyCode.Space) && inServingArea && !gm.gamePaused)
+		if (Input.GetKeyDown(KeyCode.Space) && inServingArea && !gm.gamePaused && gm.state == GameManager.GameState.InLevel)
 		{
 			ServeDrink();
 		}
@@ -55,6 +57,11 @@ public class Player : MonoBehaviour
 
 	}
 
+    public void EnableKnife(bool enable)
+    {
+        knifeSprite.gameObject.SetActive(enable);
+    }
+
     void Flip()
     {
         facingRight = !facingRight;
@@ -84,7 +91,30 @@ public class Player : MonoBehaviour
         }
     }
 
-    void ServeDrink()
+	private void OnTriggerStay(Collider other)
+	{
+		if (other.gameObject.tag == "Patron" && gm.state == GameManager.GameState.PostLevel)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+				Sprite[] _knife = Resources.LoadAll<Sprite>("Sprites/Knife");
+                knifeSprite.sprite = _knife[1];
+
+				gm.am.Play("Blood1");
+                gm.am.Play("Money");
+
+                // animate blood
+
+                // Would be nice to improve
+                Destroy(other.gameObject);
+
+                gm.UpdateScoreUI(10000);
+
+			}
+        }
+	}
+
+	void ServeDrink()
     {
         //Charge up *Stretch Goal
 

@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 2127141606215122250}
   m_Layer: 0
   m_Name: Patron
-  m_TagString: Untagged
+  m_TagString: Patron
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad7ba1d2afdf2b4cac4059df4ee5b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  canTakeDamage: 0
+  health: 3
+  isDrunk: 0
 --- !u!135 &2127141606215122250
 SphereCollider:
   m_ObjectHideFlags: 0
