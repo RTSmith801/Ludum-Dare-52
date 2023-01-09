@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
 		VirtualCameraOne.SetActive(true);
 
 		am.Stop("BGM2");
-		am.Play("BGM1");
+		am.PlayNoRestartIfPlaying("BGM1");
 	}
 
     public void GameOver()
