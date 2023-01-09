@@ -9,6 +9,7 @@ TagManager:
   - Bartop
   - Floor
   - UI
+  - FinishLine
   layers:
   - Default
   - TransparentFX

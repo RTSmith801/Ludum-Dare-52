@@ -87,6 +87,12 @@ public class Patron : MonoBehaviour
 
             StartCoroutine(HaveADrink());
         }
+
+        if(other.tag == "FinishLine")
+        {
+            print("Oh shit!!");
+            gm.PatronCrossedFinishLine();
+        }
 	}
 
     IEnumerator HaveADrink()
@@ -113,5 +119,7 @@ public class Patron : MonoBehaviour
         Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites/out");
         sr.sprite = sprites[spriteNum];
     }
+
+   
 
 }

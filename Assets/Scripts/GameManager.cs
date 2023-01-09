@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     GameObject[] bartops;
     GameObject patronPrefab;
     List<Patron> patronsInBar;
-    DialogueManager dialogueManager;
+    public DialogueManager dialogueManager;
 
     //Scene Switch Objects
     public GameObject VirtualCameraOne;
@@ -22,7 +22,13 @@ public class GameManager : MonoBehaviour
 
     //UI
     TextMeshProUGUI UIText;
-    int score = 0; 
+    int score = 0;
+
+    //Custom Text Variables
+    int brokenGlasses = 0;
+    int wastedDrinks = 0;
+
+    public bool gameOver = false;
 
     Player player;
     [SerializeField]
@@ -31,8 +37,8 @@ public class GameManager : MonoBehaviour
     public int level = 1;
 
     //spawn time variables
-    float baseMinSpawnTime = 3f;
-    float baseMaxSpawnTime = 8f;
+    float baseMinSpawnTime = 1f;
+    float baseMaxSpawnTime = 3.5f;
     float minSpawnTime;
     float maxSpawnTime;
     float randSpawnTime;
@@ -65,6 +71,7 @@ public class GameManager : MonoBehaviour
 		dialogueManager.SetDialoguePanelVisibility(true); // this pauses the game
         score = 0;
         UpdateScoreUI(0);
+        gameOver = false;
     }
 
     // Update is called once per frame
@@ -133,13 +140,14 @@ public class GameManager : MonoBehaviour
 				if (level < 4)
                 {
                     state = GameState.PreLevel;
-                    HarvesterBarSign.GetComponent<Animator>().SetTrigger("NeonSign1");
+                    HarvesterBarSign.GetComponent<Animator>().SetBool("HarvestTime", false);
                     VirtualCameraOne.SetActive(true);
                 }
                 else
                 {
                     GoToPostLevel();
-                    HarvesterBarSign.GetComponent<Animator>().SetTrigger("NeonSign2");
+                    HarvesterBarSign.GetComponent<Animator>().SetBool("HarvestTime", true);
+
                     //Turning off VirtualCameraOne zooms in to CamTwo. Enable CamOne again to zoom back out. 
                     VirtualCameraOne.SetActive(false);
                 }
@@ -167,13 +175,25 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-
+        //end the game here.
+        print("Sucks to suck");
+        gameOver = true;
+        StartCoroutine(GameOverSequence());
     }
 
-	/// <summary>
-	/// This function exists to make the Start() function easier to read
-	/// </summary>
-	void SetInitialVariables()
+    IEnumerator GameOverSequence()
+    {
+        yield return new WaitForSecondsRealtime(5f);
+        //reloading current screne. Ditching main menu? 
+        //SceneManager.LoadScene(0);
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+    /// <summary>
+    /// This function exists to make the Start() function easier to read
+    /// </summary>
+    void SetInitialVariables()
 	{
 		bartops = GameObject.FindGameObjectsWithTag("Bartop");
 		patronPrefab = Resources.Load("Prefabs/Patron") as GameObject;
@@ -207,9 +227,11 @@ public class GameManager : MonoBehaviour
     void StartLevel()
     {
         state = GameState.InLevel;
-		dialogueManager.SetDialoguePanelVisibility(false);
+        //Now being changed in Dialogue Manager
+		//dialogueManager.SetDialoguePanelVisibility(false);
 
-        player.transform.position = playerSpawnPosition;
+        //Stopping player from moving in between levels.
+        //player.transform.position = playerSpawnPosition;
 
         // Changing spawning to filter in and have a set number per level. 
         int enemiesPerBar = 1;
@@ -268,5 +290,85 @@ public class GameManager : MonoBehaviour
         UIText.text = "$" + score;
     }
 
+    // End game conditions below
+
+    public void BrokenGlass()
+    {
+        brokenGlasses += 1;
+        am.Play("GlassBreak");
+        if (brokenGlasses == 1)
+        {
+            //Temp solution. decrease profit by $3 for every glass that breaks
+            string text = "Hey! Those mugs are expensive! You're paying for that!";
+            dialogueManager.SetDialoguePanelVisibility(true, text);
+        }
+
+        else if (brokenGlasses == 3)
+        {
+            //Temp solution. decrease profit by $3 for every glass that breaks
+            string text = "I need you to actually catch those mugs.";
+            dialogueManager.SetDialoguePanelVisibility(true, text);
+        }
+
+        else if (brokenGlasses == 5)
+        {
+            //Temp solution. decrease profit by $3 for every glass that breaks
+            string text = "Catch the mugs, dammit!";
+            dialogueManager.SetDialoguePanelVisibility(true, text);
+        }
+
+        if (brokenGlasses == 6)
+        {
+            //Temp solution. decrease profit by $3 for every glass that breaks
+            string text = "That's the last straw! I'm going to have to let you go.";
+            dialogueManager.SetDialoguePanelVisibility(true, text);
+            GameOver();
+        }
+
+        UpdateScoreUI(-3);
+
+    }
+
+    public void WastedDrink()
+    {
+        wastedDrinks += 1;
+        am.Play("GlassBreak");
+
+        //Doing this instead of game over?
+        if (wastedDrinks == 1)
+        {
+            //Temp solution. decrease profit by $7 for every full beer that goes to waste
+            string text = "Who was that drink supposed to go to? That's coming out of your pay!";
+            dialogueManager.SetDialoguePanelVisibility(true, text);
+        }
+        else if (wastedDrinks == 3)
+        {
+            //Temp solution. decrease profit by $3 for every glass that breaks
+            string text = "Be careful with those drinks!";
+            dialogueManager.SetDialoguePanelVisibility(true, text);
+        }
+        else if (wastedDrinks == 5)
+        {
+            //Temp solution. decrease profit by $3 for every glass that breaks
+            string text = "I feel like you're not taking this seriously.";
+            dialogueManager.SetDialoguePanelVisibility(true, text);
+        }
+        else if (wastedDrinks == 6)
+        {
+            //Temp solution. decrease profit by $3 for every glass that breaks
+            string text = "Okay, this isn't working out. Come back when you actually want to work.";
+            dialogueManager.SetDialoguePanelVisibility(true, text);
+            GameOver();
+        }
+
+        UpdateScoreUI(-7);
+    }
+
+    public void PatronCrossedFinishLine()
+    {
+        string text = "You let a customer get to the front of the bar!? Unacceptable! You're fired!";
+        dialogueManager.SetDialoguePanelVisibility(true, text);
+        GameOver();
+    }
     enum GameState { PreLevel, InLevel, PostLevel, GameOver }
 }

@@ -7,6 +7,7 @@ public class EmptyGlass : MonoBehaviour
     GameManager gm;
     Rigidbody rb;
     public float glassMoveSpeed = 1;
+    int brokenGlasses = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,12 +15,6 @@ public class EmptyGlass : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		rb.velocity = new Vector3(1, 0, 0) * glassMoveSpeed;
 	}
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 	private void OnCollisionEnter(Collision collision)
 	{
@@ -39,14 +34,9 @@ public class EmptyGlass : MonoBehaviour
     }
 
     void BreakGlass()
-    {
-        //Temp solution. decrease profit by $1 for every glass that breaks
-        gm.UpdateScoreUI(-1);
-
-        gm.am.Play("GlassBreak");
-        gm.GameOver();
-
-        // break glass
+    {   
+        gm.BrokenGlass();
+        // Instantiate broken glass
         Destroy(gameObject);
     }
 }

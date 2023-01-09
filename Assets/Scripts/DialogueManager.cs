@@ -38,8 +38,11 @@ public class DialogueManager : MonoBehaviour
     {
         if (startTextScroll)
 			DoTheTextScroll();
-		else if (Input.GetKeyDown(KeyCode.Space) && isVisible)
+		else if (Input.GetKeyDown(KeyCode.Space) && isVisible && !gm.gameOver)
+        {
 			gm.readyToStartLevel = true;
+            SetDialoguePanelVisibility(false);
+        }
 
 
 	}
@@ -77,19 +80,45 @@ public class DialogueManager : MonoBehaviour
 
 	}
 
-	void SetText()
-	{
 
-		levelTextArray[0] = "Welcome to my taproom! Just stand next to the tap and hit space to send a cold one down the line!";
-		levelTextArray[1] = "Wow gamer, you really served up those drinks real fast! Be careful you don't get anyone TOO drunk, LOL!";
-		levelTextArray[2] = "Wizz bang! You're really good at this, look how much money we're making! God I love money!";
-		levelTextArray[3] = "Oh God! I warned you not to get them too drunk! What are we going to do?! Here, take this and HANDLE it!";
-		levelTextArray[4] = "I uh, didn't think you'd get this far...";
+    void SetText()
+    {
 
-		dialogueText.text = levelTextArray[gm.level - 1];
-	}
+        levelTextArray[0] = "Welcome to my taproom! Just stand next to the tap and hit space to send a cold one down the line!";
+        levelTextArray[1] = "Wow gamer, you really served up those drinks real fast! Be careful you don't get anyone TOO drunk, LOL!";
+        levelTextArray[2] = "Wizz bang! You're really good at this, look how much money we're making! God, I love money!";
+        levelTextArray[3] = "Oh God! I warned you not to get them too drunk! What are we going to do?! Here, take this and HANDLE it!";
+        levelTextArray[4] = "I uh, didn't think you'd get this far...";
 
-	IEnumerator StartTextScroll()
+        dialogueText.text = levelTextArray[gm.level - 1];
+    }
+
+    // Overloaded Spaghetti Code
+    public void SetDialoguePanelVisibility(bool visible, string customText)
+    {
+        isVisible = visible;
+        gm.PauseGame(visible);
+
+        if (visible)
+        {
+            SetText(customText);
+            scrollingTextTimer = 0;
+            dialogueText.maxVisibleCharacters = 0;
+            dialogueAnimator.SetTrigger("DialogueOpen");
+            StartCoroutine(StartTextScroll());
+        }
+        else
+            dialogueAnimator.SetTrigger("DialogueClose");
+
+    }
+
+    void SetText(string customText)
+    {
+        dialogueText.text = customText;
+    }
+
+
+    IEnumerator StartTextScroll()
 	{
 		yield return new WaitForSecondsRealtime(.3f);
 

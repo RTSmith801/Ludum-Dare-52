@@ -11,9 +11,10 @@ public class Beverage : MonoBehaviour
 	SphereCollider beverageCollider;
     GameObject emptyGlass;
     Animator animator;
+    int brokenGlasses = 0;
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         gm = FindObjectOfType<GameManager>();
         emptyGlass = Resources.Load("Prefabs/EmptyGlass") as GameObject;
@@ -22,17 +23,6 @@ public class Beverage : MonoBehaviour
         Vector3 direction = new Vector3(-1, 0, 0) * beverageMoveSpeed;
         rb.velocity = direction;
         animator = gameObject.GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void FixedUpdate()
-    {
-        
     }
 
     public void StopThatDrink(Transform newParent)
@@ -59,10 +49,7 @@ public class Beverage : MonoBehaviour
 
     void BreakGlass()
     {
-		gm.am.Play("GlassBreak");
-		gm.GameOver();
-
-
+        gm.WastedDrink();
         // breaking glass goes here
         Destroy(gameObject);
 	}
