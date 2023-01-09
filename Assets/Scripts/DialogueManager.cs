@@ -67,6 +67,7 @@ public class DialogueManager : MonoBehaviour
 	{
 		isVisible = visible;
 		gm.PauseGame(visible);
+		gm.player.BeverageLock(visible);
 
 		if (visible)
 		{
@@ -161,6 +162,7 @@ public class DialogueManager : MonoBehaviour
     {
         isVisible = visible;
         gm.PauseGame(visible);
+        gm.player.BeverageLock(visible);
 
         if (visible)
         {

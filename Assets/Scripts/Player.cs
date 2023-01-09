@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     GameObject beverage;
     GameManager gm;
 
+    public bool beverageLock = false;
+
     public SpriteRenderer knifeSprite;
 
     List<Patron> harvestTargets;
@@ -31,7 +33,7 @@ public class Player : MonoBehaviour
     {
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-            if (inServingArea && !gm.gamePaused && gm.state == GameManager.GameState.InLevel)
+            if (inServingArea && !beverageLock && gm.state == GameManager.GameState.InLevel)
 			    ServeDrink();
             else if (harvestTargets.Count > 0 && gm.state == GameManager.GameState.PostLevel)
             {
@@ -126,6 +128,20 @@ public class Player : MonoBehaviour
         Instantiate(beverage, position, Quaternion.identity);
         gm.am.Play("ServeDrink");
     }
+
+    public void BeverageLock(bool _beverageLock)
+    {
+        if (_beverageLock)
+            beverageLock = true;
+        else
+            StartCoroutine(UnlockBeverage());
+    }
+
+    IEnumerator UnlockBeverage()
+    {
+		yield return new WaitForSecondsRealtime(.1f);
+        beverageLock = false;
+	}
 
 
 }

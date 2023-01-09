@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public bool gameOver = false;
 
-    Player player;
+    public Player player;
     [SerializeField]
     Vector3 playerSpawnPosition;
 
