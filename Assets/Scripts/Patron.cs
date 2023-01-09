@@ -7,7 +7,7 @@ public class Patron : MonoBehaviour
 {
     // Made private so I could update in script without unity being a fuck-head. 
     float moveSpeedMin = 1;
-    float moveSpeedMax = 3.5f;
+    float moveSpeedMax = 2.5f;
     float moveSpeed;
     float drinkSpeed = 1;
     Beverage bev;
@@ -16,7 +16,7 @@ public class Patron : MonoBehaviour
     bool isDrinking = false;
     float knockbackDuration = .2f;
     float knockbackTimer = 0f;
-    float knockbackPower = 25f;
+    float knockbackPower = 35f;
 
     GameManager gm;
     SpriteRenderer sr;
