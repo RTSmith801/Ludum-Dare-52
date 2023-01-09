@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.PlayerSettings;
+//using static UnityEditor.PlayerSettings;
 
 public class GameManager : MonoBehaviour
 {
@@ -174,9 +174,7 @@ public class GameManager : MonoBehaviour
 	}
 
     public void GameOver()
-    {
-        //end the game here.
-        print("Sucks to suck");
+    {   
         gameOver = true;
         StartCoroutine(GameOverSequence());
     }

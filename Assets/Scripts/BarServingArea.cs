@@ -6,7 +6,6 @@ using UnityEngine.Animations;
 public class BarServingArea : MonoBehaviour
 {
     Animator anim;
-    bool playerInServingArea = false;
     
     void Start()
     {
@@ -16,8 +15,7 @@ public class BarServingArea : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
-        {
-            playerInServingArea = true;
+        {   
             anim.SetTrigger("PlayerEnter");
         }
     }
@@ -26,7 +24,6 @@ public class BarServingArea : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            playerInServingArea = false;
             anim.SetTrigger("PlayerExit");
         }
     }

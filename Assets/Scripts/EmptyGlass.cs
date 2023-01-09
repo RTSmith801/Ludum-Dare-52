@@ -7,7 +7,6 @@ public class EmptyGlass : MonoBehaviour
     GameManager gm;
     Rigidbody rb;
     public float glassMoveSpeed = 1;
-    int brokenGlasses = 0;
     // Start is called before the first frame update
     void Start()
     {

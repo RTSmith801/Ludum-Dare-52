@@ -24,7 +24,7 @@ public class Patron : MonoBehaviour
     [SerializeField]
     bool canTakeDamage;
     [SerializeField]
-    int health = 3;
+    //int health = 3;
 
 
     // Start is called before the first frame update
@@ -89,8 +89,7 @@ public class Patron : MonoBehaviour
         }
 
         if(other.tag == "FinishLine")
-        {
-            print("Oh shit!!");
+        {   
             gm.PatronCrossedFinishLine();
         }
 	}
