@@ -102,10 +102,11 @@ public class Patron : MonoBehaviour
         hasHadABeverage = true;
         isDrinking = true;
         knockbackTimer = 0f;
+		gm.am.Play("gulp");
 
-        yield return new WaitForSeconds(drinkSpeed);
+		yield return new WaitForSeconds(drinkSpeed);
 
-        isDrinking = false;
+		isDrinking = false;
         bev.ReturnThatGlass();
     }
 
