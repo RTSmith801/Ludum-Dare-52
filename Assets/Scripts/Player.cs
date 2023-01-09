@@ -91,6 +91,7 @@ public class Player : MonoBehaviour
         //Currently auto-launches drink
         Vector3 position = servingAreaTransform.position + new Vector3(-1.2f, 1f, 0f);
         Instantiate(beverage, position, Quaternion.identity);
+        gm.am.Play("ServeDrink");
     }
 
 

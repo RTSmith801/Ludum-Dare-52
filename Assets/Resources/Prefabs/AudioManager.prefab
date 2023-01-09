@@ -47,8 +47,8 @@ MonoBehaviour:
   BGMFadeTimer: 1
   sounds:
   - name: BGM1
-    clip: {fileID: 8300000, guid: f2d2c5e03c0de8244ac62a824778ff4e, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: 9aec7f6cbfd44d24997eb949e4185e74, type: 3}
+    volume: 0.751
     pitch: 1
     loop: 1
     playOnAwake: 0
@@ -79,7 +79,39 @@ MonoBehaviour:
     source: {fileID: 0}
     group: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}
   - name: GlassBreak
-    clip: {fileID: 8300000, guid: fba20314fcab8944abb5533d5d481609, type: 3}
+    clip: {fileID: 8300000, guid: 8e56702b2a0691545b40790d58fba4cf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+    group: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}
+  - name: Blood1
+    clip: {fileID: 8300000, guid: 83ebc13e0b995854f8ff3d9c5ef6a320, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+    group: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}
+  - name: Blood2
+    clip: {fileID: 8300000, guid: 72f47076359b9da4296d6f7d1ab472d5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+    group: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}
+  - name: ServeDrink
+    clip: {fileID: 8300000, guid: 6da463f5b0d5200489b297ff15b1b33b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    source: {fileID: 0}
+    group: {fileID: 24300002, guid: 3f3b74f4de856a0489bbd2fc109f4a7a, type: 2}
+  - name: Money
+    clip: {fileID: 8300000, guid: 4c3999f3c31adad47a9e142962381ed7, type: 3}
     volume: 1
     pitch: 1
     loop: 0
