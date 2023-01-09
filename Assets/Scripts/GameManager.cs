@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     //UI
     TextMeshProUGUI UIText;
+    int highScore;
     int score = 0;
 
     //Custom Text Variables
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         UpdateScoreUI(0);
         gameOver = false;
         drunkPatron = false;
+        highScore = PlayerPrefs.GetInt("highScore", 0);
     }
 
     // Update is called once per frame
@@ -182,8 +184,28 @@ public class GameManager : MonoBehaviour
 
         if (drunkPatrons.Count <= 0)
         {
-			string text = "These organs you harvested go for big bucks on the black market! Good work, gamer!";
-			dialogueManager.SetDialoguePanelVisibility(true, text);
+			string text = "";
+
+            int rand = Random.Range(0, 4);
+            switch (rand)
+            {
+                case 0:
+                    text = "These organs you harvested go for big bucks on the black market! Good work, gamer!";
+                    break;
+                case 1:
+                    text = "A kidney here, a liver there. No one will ever know!";
+                    break;
+                case 2:
+                    text = "Ain't nothing but a little blood money!";
+                    break;
+                case 3:
+                    text = "Good harvest!";
+                    break;
+                default:
+                    text = "Good harvest!";
+                    break;
+            }
+            dialogueManager.SetDialoguePanelVisibility(true, text);
             GoToPreLevel();
 		}
 
@@ -205,8 +227,12 @@ public class GameManager : MonoBehaviour
 	}
 
     public void GameOver()
-    {   
+    {
+        am.Stop("BGM1");
+        am.Play("EndGame");
         gameOver = true;
+        PlayerPrefs.SetInt("highScore", highScore);
+        PlayerPrefs.Save();
         StartCoroutine(GameOverSequence());
     }
 
@@ -350,7 +376,12 @@ public class GameManager : MonoBehaviour
     public void UpdateScoreUI(int update)
     {
         score += update;
-        UIText.text = "$" + score;
+        if(score > highScore)
+        {
+            highScore = score;
+        }
+        UIText.text = "HIGHSCORE: $" + highScore + "\nSCORE: $" + score;
+
     }
 
     // End game conditions below
