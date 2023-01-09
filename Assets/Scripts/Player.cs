@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     Rigidbody rb;
     public float playerMoveSpeed = 1;
     bool inServingArea = false;
-    bool facingRight = true;
+    bool facingRight;
     Transform servingAreaTransform;
     GameObject beverage;
     GameManager gm;
@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        facingRight = transform.position.x == 1;
         rb = GetComponent<Rigidbody>();
         gm = FindObjectOfType<GameManager>();
         beverage = Resources.Load("Prefabs/Beverage") as GameObject;
@@ -82,10 +83,10 @@ public class Player : MonoBehaviour
 
 		//if moving left and player is facing right
 		if (hor < 0 && facingRight)
-			Flip();
+			UpdateXScaleForFacing();
 		//if moving right and player is facing left
 		else if (hor > 0 && !facingRight)
-			Flip();
+			UpdateXScaleForFacing();
 
 		Vector3 direction = new Vector3(hor, 0, ver) * 25f * playerMoveSpeed;
 		rb.velocity = direction;
@@ -99,13 +100,16 @@ public class Player : MonoBehaviour
         knifeSprite.gameObject.SetActive(enable);
     }
 
-    void Flip()
+    void UpdateXScaleForFacing()
     {
         facingRight = !facingRight;
 
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+        float xScale = facingRight ? 1 : -1;
+        transform.localScale = new Vector3(xScale, 1, 1);
+
+        //Vector3 theScale = transform.localScale;
+        //theScale.x *= -1;
+        //transform.localScale = theScale;
     }
   
     private void OnTriggerEnter(Collider other)
