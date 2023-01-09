@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
     List<Patron> patronsInBar;
     DialogueManager dialogueManager;
 
+    public GameObject VirtualCameraOne;
+    public SpriteRenderer HarvesterBarSign;
+    public Sprite HarvesterBarSign1; 
+    public Sprite HarvesterBarSign2; 
+
     Player player;
     [SerializeField]
     Vector3 playerSpawnPosition;
@@ -106,10 +111,21 @@ public class GameManager : MonoBehaviour
 
 				dialogueManager.SetDialoguePanelVisibility(true);
 
+                //Currently hardcoded to stop at level 4. Revisit this to continue gameplay. 
 				if (level < 4)
+                {
                     state = GameState.PreLevel;
+                    HarvesterBarSign.sprite = HarvesterBarSign1;
+                    VirtualCameraOne.SetActive(true);
+                }
                 else
+                {
                     GoToPostLevel();
+                    HarvesterBarSign.sprite = HarvesterBarSign2;
+                    //Turning off VirtualCameraOne zooms in to CamTwo. Enable CamOne again to zoom back out. 
+                    VirtualCameraOne.SetActive(false);
+                }
+                    
 
 			}
 		}

@@ -46,5 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   am: {fileID: 0}
   bartops: []
+  VirtualCameraOne: {fileID: 0}
+  HarvesterBarSign: {fileID: 0}
+  HarvesterBarSign1: {fileID: -1093099718, guid: 2f38bb1a5848a8348ade2361eb67d2f9, type: 3}
+  HarvesterBarSign2: {fileID: 1470935492, guid: 2f38bb1a5848a8348ade2361eb67d2f9, type: 3}
   playerSpawnPosition: {x: 11, y: 1, z: 8.5}
   level: 1
+  readyToStartLevel: 0
