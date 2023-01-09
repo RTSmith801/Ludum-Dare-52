@@ -24,7 +24,8 @@ public class Patron : MonoBehaviour
     [SerializeField]
     bool canTakeDamage;
     [SerializeField]
-    //int health = 3;
+    int health = 3;
+    bool blackout = false;
 
 
     // Start is called before the first frame update
@@ -48,17 +49,26 @@ public class Patron : MonoBehaviour
     {
         if (!gm.gamePaused)
         {
-			if (!isDrinking)
-				transform.position = transform.position + (Vector3.right * Time.deltaTime * moveSpeed);
-			else if (knockbackTimer < knockbackDuration)
-			{
-				knockbackTimer += Time.deltaTime;
-                //knockback changed to moveSpeedMin
-				transform.position = transform.position - (Vector3.right * Time.deltaTime * moveSpeedMin * knockbackPower);
+            if (!blackout)
+            {
+				if (!isDrinking)
+					transform.position = transform.position + (Vector3.right * Time.deltaTime * moveSpeed);
+				else if (knockbackTimer < knockbackDuration)
+				{
+					knockbackTimer += Time.deltaTime;
+					//knockback changed to moveSpeedMin
+					transform.position = transform.position - (Vector3.right * Time.deltaTime * moveSpeedMin * knockbackPower);
+				}
+
+				if (transform.position.x < -10 && hasHadABeverage)
+					GoHome();
 			}
 
-			if (transform.position.x < -10 && hasHadABeverage)
-				GoHome();
+            else
+            {
+
+            }
+
 		}
 	}
 
@@ -80,7 +90,7 @@ public class Patron : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.tag == "Beverage" && !isDrinking)
+		if (other.tag == "Beverage" && !isDrinking && !blackout)
         {
             bev = other.GetComponent<Beverage>();
             bev.StopThatDrink(transform);
@@ -104,10 +114,26 @@ public class Patron : MonoBehaviour
         knockbackTimer = 0f;
 		gm.am.Play("gulp");
 
+        if (canTakeDamage)
+            health--;
+
 		yield return new WaitForSeconds(drinkSpeed);
 
 		isDrinking = false;
         bev.ReturnThatGlass();
+
+        if (health <= 0)
+        {
+            Blackout();
+        }
+    }
+
+    void Blackout()
+    {
+        gm.am.Play("thud");
+        blackout = true;
+        sr.transform.position = sr.transform.position + new Vector3(1, 0, 1);
+        sr.transform.rotation = sr.transform.rotation * Quaternion.Euler(0, 0, -90);
     }
 
 
