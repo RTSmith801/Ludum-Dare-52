@@ -73,7 +73,7 @@ public class Patron : MonoBehaviour
 
     void GoHome()
     {
-        //Audio for getting them out of the bar? 
+        gm.am.Play("Money");
         gm.NotifyGoingHome(this);
         Destroy(gameObject);
     }
