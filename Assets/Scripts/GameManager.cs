@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviour
     List<Patron> patronsInBar;
     DialogueManager dialogueManager;
 
+    //Scene Switch Objects
     public GameObject VirtualCameraOne;
-    public SpriteRenderer HarvesterBarSign;
-    public Sprite HarvesterBarSign1; 
-    public Sprite HarvesterBarSign2; 
+    public GameObject HarvesterBarSign;
+
+    //UI
+    TextMeshProUGUI UIText;
+    int score = 0; 
 
     Player player;
     [SerializeField]
@@ -35,6 +38,10 @@ public class GameManager : MonoBehaviour
     float randSpawnTime;
     float spawnTimer;
 
+    //determines how many patrons will spawn in the level
+    public int startingMaxPatrons = 4;
+    public int levelPatrons; 
+
 
 
     public bool gamePaused { get; private set; }
@@ -45,18 +52,20 @@ public class GameManager : MonoBehaviour
 	private void Awake()
     {
         am = FindObjectOfType<AudioManager>();
+        UIText = GameObject.FindGameObjectWithTag("UI").GetComponent<TextMeshProUGUI>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         SetInitialVariables();
-
-		state = GameState.PreLevel;
+        levelPatrons = startingMaxPatrons;
+        state = GameState.PreLevel;
 
 		dialogueManager.SetDialoguePanelVisibility(true); // this pauses the game
-	}
-
+        score = 0;
+        UpdateScoreUI(0);
+    }
 
     // Update is called once per frame
     void Update()
@@ -95,18 +104,27 @@ public class GameManager : MonoBehaviour
 		if (!gamePaused)
 		{
 			spawnTimer += Time.deltaTime;
-			if (spawnTimer > randSpawnTime)
+
+            // Jump timer to spawan another patron if the bar is empty
+            if (patronsInBar.Count <= 0)
+            {
+                spawnTimer += randSpawnTime;
+            }
+
+			if (spawnTimer > randSpawnTime && levelPatrons > 0)
 			{
 				SpawnPatron();
 				spawnTimer = 0;
 				randSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);
 			}
 
-			if (patronsInBar.Count <= 0)
+			if (patronsInBar.Count <= 0 && levelPatrons <= 0)
 			{
-				level++;
+                //increase level and increase patrons
+                level++;
+                levelPatrons = (startingMaxPatrons + (level * 2));  
 
-				minSpawnTime *= .9f;
+                minSpawnTime *= .9f;
 				maxSpawnTime *= .9f;
 
 				dialogueManager.SetDialoguePanelVisibility(true);
@@ -115,13 +133,13 @@ public class GameManager : MonoBehaviour
 				if (level < 4)
                 {
                     state = GameState.PreLevel;
-                    HarvesterBarSign.sprite = HarvesterBarSign1;
+                    HarvesterBarSign.GetComponent<Animator>().SetTrigger("NeonSign1");
                     VirtualCameraOne.SetActive(true);
                 }
                 else
                 {
                     GoToPostLevel();
-                    HarvesterBarSign.sprite = HarvesterBarSign2;
+                    HarvesterBarSign.GetComponent<Animator>().SetTrigger("NeonSign2");
                     //Turning off VirtualCameraOne zooms in to CamTwo. Enable CamOne again to zoom back out. 
                     VirtualCameraOne.SetActive(false);
                 }
@@ -193,11 +211,12 @@ public class GameManager : MonoBehaviour
 
         player.transform.position = playerSpawnPosition;
 
-        int enemiesPerBar;
-        if (level < 4)
-            enemiesPerBar = level;
-        else
-            enemiesPerBar = 4;
+        // Changing spawning to filter in and have a set number per level. 
+        int enemiesPerBar = 1;
+        //if (level < 4)
+        //    enemiesPerBar = level;
+        //else
+        //    enemiesPerBar = 4;
 
         // Spawns all the patrons and adds them to the list of patrons
         foreach (var bartop in bartops)
@@ -228,6 +247,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void SpawnPatron()
     {
+        //decrease the number of patrons that will spawn in the level
+        levelPatrons--;
+
         int barNum = Random.Range(0, bartops.Length);
 		Vector3 pos = new Vector3(-12, 1.01f, bartops[barNum].transform.position.z);
 
@@ -240,7 +262,11 @@ public class GameManager : MonoBehaviour
         patronsInBar.Remove(patronGoingHome);
     }
 
+    public void UpdateScoreUI(int update)
+    {
+        score += update;
+        UIText.text = "$" + score;
+    }
 
-
-	enum GameState { PreLevel, InLevel, PostLevel, GameOver }
+    enum GameState { PreLevel, InLevel, PostLevel, GameOver }
 }

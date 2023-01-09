@@ -121,9 +121,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 108
-        width: 108
-        height: 108
+        y: 90
+        width: 116
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ea713b6ddafd2f43b20bca2d55f2569
-      internalID: -1093099718
+      spriteID: 8ae96e9e7049ac949be939ff380477c6
+      internalID: -1836198223
       vertices: []
       indices: 
       edges: []
@@ -142,9 +142,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 108
-        height: 108
+        y: 60
+        width: 116
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,8 +152,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f246273198803444a874ac6bc0b7e29f
-      internalID: 1470935492
+      spriteID: 2b94726f48aaefe44973f3ff1d37b6f9
+      internalID: -579154709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NeonSign3_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 30
+        width: 116
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3147aec074b4b3e42afb678e61c99dba
+      internalID: -461291332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NeonSign3_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 116
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2ce99aad97dcc642a84d911f2a98927
+      internalID: 502740609
       vertices: []
       indices: 
       edges: []
@@ -161,7 +203,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 287a49fda0df29140a9376774c4452cb
+    spriteID: c44ff96a2ad709f499d870a5140b2628
     internalID: 0
     vertices: []
     indices: 
@@ -169,8 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      NeonSign3_0: -1093099718
-      NeonSign3_1: 1470935492
+      NeonSign3_2: -461291332
+      NeonSign3_3: 502740609
+      NeonSign3_0: -1836198223
+      NeonSign3_1: -579154709
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

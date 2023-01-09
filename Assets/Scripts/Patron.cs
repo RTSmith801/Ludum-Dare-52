@@ -5,15 +5,18 @@ using UnityEngine.EventSystems;
 
 public class Patron : MonoBehaviour
 {
-    public float moveSpeed = 1;
-    public float drinkSpeed = 1;
+    // Made private so I could update in script without unity being a fuck-head. 
+    float moveSpeedMin = 1;
+    float moveSpeedMax = 3.5f;
+    float moveSpeed;
+    float drinkSpeed = 1;
     Beverage bev;
 
     bool hasHadABeverage = false;
     bool isDrinking = false;
     float knockbackDuration = .2f;
     float knockbackTimer = 0f;
-    float knockbackPower = 20f;
+    float knockbackPower = 25f;
 
     GameManager gm;
     SpriteRenderer sr;
@@ -28,7 +31,16 @@ public class Patron : MonoBehaviour
     void Start()
     {
         SetRandomPatronSprite();
+
+        //Randomize Move Speed;
+        SetRandomMoveSpeed();
+
         gm = FindObjectOfType<GameManager>();
+    }
+
+    void SetRandomMoveSpeed()
+    {
+        moveSpeed = Random.Range(moveSpeedMin, moveSpeedMax);
     }
 
     // Update is called once per frame
@@ -41,7 +53,8 @@ public class Patron : MonoBehaviour
 			else if (knockbackTimer < knockbackDuration)
 			{
 				knockbackTimer += Time.deltaTime;
-				transform.position = transform.position - (Vector3.right * Time.deltaTime * moveSpeed * knockbackPower);
+                //knockback changed to moveSpeedMin
+				transform.position = transform.position - (Vector3.right * Time.deltaTime * moveSpeedMin * knockbackPower);
 			}
 
 			if (transform.position.x < -10 && hasHadABeverage)
@@ -60,6 +73,7 @@ public class Patron : MonoBehaviour
 
     void GoHome()
     {
+        //Audio for getting them out of the bar? 
         gm.NotifyGoingHome(this);
         Destroy(gameObject);
     }
@@ -77,6 +91,9 @@ public class Patron : MonoBehaviour
 
     IEnumerator HaveADrink()
     {
+        //Update Score by $7 per beer
+        gm.UpdateScoreUI(7);
+
         hasHadABeverage = true;
         isDrinking = true;
         knockbackTimer = 0f;

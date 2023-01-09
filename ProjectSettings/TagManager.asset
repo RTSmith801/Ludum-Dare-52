@@ -8,6 +8,7 @@ TagManager:
   - Beverage
   - Bartop
   - Floor
+  - UI
   layers:
   - Default
   - TransparentFX

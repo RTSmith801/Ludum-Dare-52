@@ -34,10 +34,15 @@ public class EmptyGlass : MonoBehaviour
     void CatchGlass()
     {
         Destroy(gameObject);
+        //audio for catch glass
+        //point increase? 
     }
 
     void BreakGlass()
     {
+        //Temp solution. decrease profit by $1 for every glass that breaks
+        gm.UpdateScoreUI(-1);
+
         gm.am.Play("GlassBreak");
         gm.GameOver();
 
